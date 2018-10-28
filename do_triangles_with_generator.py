@@ -5,6 +5,7 @@ def triangles():
         yield(row)
         row = [1] + [row[k] + row[k + 1] for k in range(len(row) - 1)] + [1]
         #当range中的参数为0时 会生成一个空序列 因此不存在list溢出的问题
+        
 
 n = 0
 results = []
