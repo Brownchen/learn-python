@@ -2,14 +2,38 @@ from numpy import *
 import operator
 import os
 from collections import Counter
+import matplotlib.pyplot as plt 
+from sklearn.cross_validation import train_test_split
 
 
-def creatDataset():
-    group = array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
-    labels = ['A','A','B','B']
-    return group,labels
+
+# =============================================================================
+# def creatDataset():
+#     '''
+#     手动创建一个训练数据集，包括训练数据featrues和labels    
+#     '''
+#     group = array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
+#     labels = ['A','A','B','B']
+#     return group,labels
+# =============================================================================
+
+def readDatasetfromMat():
+    Img = sio.loadmat('E:/陈敏/Data/cmWork/learn_python/learn-python/kNN/IndianPine_Data')
+    data = Img['IndianPine']
+    GT = sio.loadmat('E:/陈敏/Data/cmWork/learn_python/learn-python/kNN/IndianPine_GT')
+    labels = GT['GT']
+    train_data,test_data,train_label,test_label = train_test_split(data,labels,test_size=0.3,random_state=0)
+    return train_data,test_data,train_label,test_label
+
 
 def classfiy0(inX,dataSet,labels,k):
+    '''
+    实现KNN算法的分类函数
+    inX:测试数据的featrues
+    dataSet:训练数据的features
+    labels:训练数据的标签
+    k：kNN的参数
+    '''
     dataSetSize = dataSet.shape[0]
     diffMat = tile(inX,(dataSetSize,1)) - dataSet
     sqDiffMat = diffMat**2
@@ -24,10 +48,12 @@ def classfiy0(inX,dataSet,labels,k):
     return sortedClassCount[0][0]
 
 def test():
-    group,labels = creatDataset()
-    print(str(group))
-    print(str(labels))
-    print(classfiy0([0.1,0.1],group,labels,3))
+    #group,labels = creatDataset()
+    #print(str(group))
+    #print(str(labels))
+    #print(classfiy0([0.1,0.1],group,labels,3))
+    train_data,test_data,train_label,test_label = readDatasetfromMat()
+    pred_label = classfiy0(test_data,train_data,train_label,3)
     
 
 if __name__ == '__main__':
