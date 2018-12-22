@@ -16,9 +16,12 @@ import spectral
 #其中'IndianPine'key对应的就是145*145*200的数据
 Img = sio.loadmat('E:/陈敏/Data/cmWork/learn_python/learn-python/kNN/IndianPine_Data')
 data = Img['IndianPine']
+<<<<<<< HEAD
 #print(data.shape)
 print(data.type)
 (x,y,z) = data.shape
+=======
+>>>>>>> 01706d352af962194414ba724e1f8cfec7eb6f43
 #print(data.shape[0])
 
 #读入标签，首先利用matlab的multibandread函数
@@ -26,6 +29,7 @@ print(data.type)
 #然后与读入数据一样，从dict中取出label
 GT = sio.loadmat('E:/陈敏/Data/cmWork/learn_python/learn-python/kNN/IndianPine_GT')
 label = GT['GT']
+<<<<<<< HEAD
 #print(label.shape)
 # =============================================================================
 # data_matrix = np.zeros((x,y))
@@ -34,3 +38,6 @@ label = GT['GT']
 #         data_matrix[i][j] = data[i][j]
 # print(data_matrix.shape)
 # =============================================================================
+=======
+#print(label.shape)
+>>>>>>> 01706d352af962194414ba724e1f8cfec7eb6f43

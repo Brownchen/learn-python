@@ -34,6 +34,7 @@ def classfiy0(inX,dataSet,labels,k):
     labels:训练数据的标签
     k：kNN的参数
     '''
+<<<<<<< HEAD
     #dataSetSize = dataSet.shape[0]
     #diffMat = tile(inX,(dataSetSize,1)) - dataSet##测试数据与训练数据的矩阵格式不同
     #sqDiffMat = diffMat**2
@@ -47,6 +48,14 @@ def classfiy0(inX,dataSet,labels,k):
     dists = np.sqrt(-2*np.dot(inX,dataSet.T) + np.num(square(dataSet,axis=1)) + np.transpose([np.sum(np.square(inX,axis=1))]))
     
     sortedDistIndicies = dists.argsort()
+=======
+    dataSetSize = dataSet.shape[0]
+    diffMat = tile(inX,(dataSetSize,1)) - dataSet
+    sqDiffMat = diffMat**2
+    sqDistances = sqDiffMat.sum(axis=1)
+    distances = sqDistances**0.5
+    sortedDistIndicies = distances.argsort()
+>>>>>>> 01706d352af962194414ba724e1f8cfec7eb6f43
     classCount = {}
     for i in range(k):
         voteIlabel = labels[sortedDistIndicies[i]]
