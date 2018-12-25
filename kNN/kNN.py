@@ -45,6 +45,10 @@ def classfiy0(inX,dataSet,labels,k):
     labels:训练数据的标签
     k：kNN的参数
     '''
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> ba5e485b07c9be8da36577ea8c65fa55ba89c820
     #dataSetSize = dataSet.shape[0]
     #diffMat = tile(inX,(dataSetSize,1)) - dataSet##测试数据与训练数据的矩阵格式不同
     #sqDiffMat = diffMat**2
@@ -52,6 +56,7 @@ def classfiy0(inX,dataSet,labels,k):
     #distances = sqDistances**0.5
     '''使用矩阵运算的方法计算两个矩阵之间的欧式距离 '''
     '''https://blog.csdn.net/frankzd/article/details/80251042'''
+<<<<<<< HEAD
     dim = inX.shape[2]
     num_testSet = inX.shape[0]
     num_trainSet = dataSet.shape[0]
@@ -83,6 +88,28 @@ def classfiy0(inX,dataSet,labels,k):
         pred[i] = np.argmax(np.bincount(clot_labels))
     return pred[i]
 
+=======
+    num_testSet = inX.shape[0]
+    num_trainSet = dataSet.shape[0]
+    dists = np.zeros((num_testSet,num_trainSet))
+    dists = np.sqrt(-2*np.dot(inX,dataSet.T) + np.num(square(dataSet,axis=1)) + np.transpose([np.sum(np.square(inX,axis=1))]))
+    
+    sortedDistIndicies = dists.argsort()
+=======
+    dataSetSize = dataSet.shape[0]
+    diffMat = tile(inX,(dataSetSize,1)) - dataSet
+    sqDiffMat = diffMat**2
+    sqDistances = sqDiffMat.sum(axis=1)
+    distances = sqDistances**0.5
+    sortedDistIndicies = distances.argsort()
+>>>>>>> 01706d352af962194414ba724e1f8cfec7eb6f43
+    classCount = {}
+    for i in range(k):
+        voteIlabel = labels[sortedDistIndicies[i]]
+        classCount[voteIlabel] = classCount.get(voteIlabel,0) + 1
+    sortedClassCount = sorted(classCount.items(),key=operator.itemgetter(1),reverse=True)
+    return sortedClassCount[0][0]
+>>>>>>> ba5e485b07c9be8da36577ea8c65fa55ba89c820
 
 def test():
     #group,labels = creatDataset()
